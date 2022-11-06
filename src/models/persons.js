@@ -11,6 +11,7 @@ export const getPerson = (id) => {
 export const createPerson = (person) => {
   const id = uuid()
   persons.push({ id, ...person })
+  return getPerson(id)
 }
 
 export const updatePerson = (id, person) => {
