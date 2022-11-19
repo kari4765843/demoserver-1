@@ -15,10 +15,13 @@ router.get('/', async (req, res) => {
   const page = Number(req.query.page) || 1
   const skip = size * (page - 1)
   const take = size
-  const employees = await getEmployees(skip, take)
+  const { count, employees } = await getEmployees(skip, take)
+  res.set({
+    'X-Total-Count': count,
+    'X-Total-Pages': Math.ceil(count / size),
+  })
   res.send(employees)
 })
-
 router.get('/:id', async (req, res) => {
   const employee = await getEmployee(req.params.id)
   if (employee) {
