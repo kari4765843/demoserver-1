@@ -1,6 +1,9 @@
 import db from '../helpers/db'
 
-export const getEmployees = async () => db.employee.findMany()
+export const getEmployees = async (skip = 0, take = 10) => db.employee.findMany({
+    skip,
+    take,
+})
 
 export const getEmployee = async (id) =>
   db.employee.findUnique({ where: { employeeId: id } })
